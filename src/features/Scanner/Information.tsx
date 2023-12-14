@@ -228,9 +228,11 @@ export const Information: React.FC<Props> = ({
                       <ListItem className="w-full flex justify-between">
                         <div className="w-1/3 sm:w-2/5">Creator</div>
                         <Link
-                          href={`${info.explorer}/address/${
-                            creator_address ?? "-"
-                          }`}
+                          href={`${info.explorer}/${
+                            chainId === SupportedChainId.AVALANCHE
+                              ? "blockchain/all/address"
+                              : "address"
+                          }/${creator_address ?? "-"}`}
                           rel="noopener noreferrer"
                           target="_blank"
                           className="w-3/5 sm:w-[55%] text-right text-blue-500 underline underline-offset-4"
@@ -243,9 +245,11 @@ export const Information: React.FC<Props> = ({
                       <ListItem className="w-full flex justify-between">
                         <div className="w-1/3 sm:w-2/5">Owner</div>
                         <Link
-                          href={`${info.explorer}/address/${
-                            owner_address ?? "-"
-                          }`}
+                          href={`${info.explorer}/${
+                            chainId === SupportedChainId.AVALANCHE
+                              ? "blockchain/all/address"
+                              : "address"
+                          }/${owner_address ?? "-"}`}
                           rel="noopener noreferrer"
                           target="_blank"
                           className="w-3/5 sm:w-[55%] text-right text-blue-500 underline underline-offset-4"
@@ -258,9 +262,11 @@ export const Information: React.FC<Props> = ({
                       <ListItem className="w-full flex justify-between">
                         <div className="w-1/3 sm:w-2/5">Explorer</div>
                         <Link
-                          href={`${info.explorer}/token/${
-                            contractAddress ?? "-"
-                          }`}
+                          href={`${info.explorer}/${
+                            chainId === SupportedChainId.AVALANCHE
+                              ? "blockchain/c/address"
+                              : "token"
+                          }/${contractAddress ?? "-"}`}
                           rel="noopener noreferrer"
                           target="_blank"
                           className="w-3/5 sm:w-[55%] text-right text-blue-500 underline underline-offset-4"
@@ -275,7 +281,12 @@ export const Information: React.FC<Props> = ({
                         <ListItem className="w-full flex justify-between">
                           <div className="w-1/3 sm:w-2/5">Pair</div>
                           <Link
-                            href={`${urls.dexTools}/${info.dext}/pair-explorer/${dex[0].pair}`}
+                            // href={`${urls.dexTools}/${info.dext}/pair-explorer/${dex[0].pair}`}
+                            href={`${info.explorer}/${
+                              chainId === SupportedChainId.AVALANCHE
+                                ? "blockchain/c/address"
+                                : "address"
+                            }/${dex[0].pair}`}
                             rel="noopener noreferrer"
                             target="_blank"
                             className="w-3/5 sm:w-[55%] text-right text-blue-500 underline underline-offset-4"
@@ -441,12 +452,6 @@ export const Information: React.FC<Props> = ({
           </div>
           <div className="w-full h-full sm:w-[47.5%] mt-4 sm:mt-0">
             <InformationOverview scanResponse={scanResponse} />
-
-            {/* <iframe
-              className="w-full h-full"
-              src="https://www.dextools.io/widgets/en/ether/pe-light/0x1E053b6d2f0a578505BFD8bfE344295a9A08BbD2?theme=dark&chartType=1&chartResolution=30&drawingToolbars=false&headerColor=1f2123&tvPlatformColor=1f2123&tvPaneColor=15171B"
-            /> */}
-
             <InformationTable
               chainExplorer={info.explorer}
               dex={dex}
@@ -454,6 +459,14 @@ export const Information: React.FC<Props> = ({
               holder_count={holder_count}
               extraClass="block sm:hidden"
             />
+            {!!info.dexs && (
+              <div className="w-full h-screen mt-4">
+                <iframe
+                  className="h-full w-full rounded-lg border border-[#131313] z-10"
+                  src={`https://dexscreener.com/${info.dexs}/${contractAddress}`}
+                ></iframe>
+              </div>
+            )}
           </div>
           {/* <div className="mt-6 mb-3 relative mx-auto w-full sm:w-1/3 px-2 sm:px-0">
             <Image src={GoPlusLogo} alt="go+" className="object-contain" />

@@ -181,7 +181,7 @@ const Scanner: React.FC<Props> = () => {
                           {ChainList.map((item) => (
                             <MenuItem
                               key={item.chainId}
-                              className="w-fit bg-inherit text-white"
+                              className="w-2/5 bg-inherit text-white"
                               onClick={() => onChangeChainId(item.chainId)}
                             >
                               <Box display="flex" alignItems="center">
