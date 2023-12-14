@@ -16,6 +16,7 @@ import {
   AlertTitle,
   AlertDescription,
   useToast,
+  CardFooter,
 } from "@chakra-ui/react";
 
 import { InformationTable } from "./InformationTable";
@@ -305,7 +306,7 @@ export const Information: React.FC<Props> = ({
 
                   <List className="w-full md:w-[35%] mt-4 md:mt-0" spacing={2}>
                     <ListItem className="w-full flex flex-col">
-                      <div className="w-full">Decimals</div>
+                      <div className="w-full">Token Decimals</div>
                       <div className="w-full">
                         {tokenResponse?.data?.decimals
                           ? Number(
@@ -404,7 +405,7 @@ export const Information: React.FC<Props> = ({
                   </div>
                 </div>
               </CardBody>
-              {/* <CardFooter className="w-full pt-0">
+              <CardFooter className="w-full pt-0">
                 <div className="w-full flex flex-wrap justify-center mx-auto">
                   {dex && Boolean(dex.length) && (
                     <Link
@@ -439,7 +440,7 @@ export const Information: React.FC<Props> = ({
                     </Link>
                   )}
                 </div>
-              </CardFooter> */}
+              </CardFooter>
             </Card>
 
             <InformationTable
@@ -459,14 +460,14 @@ export const Information: React.FC<Props> = ({
               holder_count={holder_count}
               extraClass="block sm:hidden"
             />
-            {!!info.dexs && (
+            {/* {!!info.dexs && (
               <div className="w-full h-screen mt-4">
                 <iframe
                   className="h-full w-full rounded-lg border border-[#131313] z-10"
                   src={`https://dexscreener.com/${info.dexs}/${contractAddress}`}
                 ></iframe>
               </div>
-            )}
+            )} */}
           </div>
           {/* <div className="mt-6 mb-3 relative mx-auto w-full sm:w-1/3 px-2 sm:px-0">
             <Image src={GoPlusLogo} alt="go+" className="object-contain" />
