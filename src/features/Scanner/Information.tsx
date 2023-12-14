@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import axios from "axios";
+import { useQuery } from "react-query";
 import { CopyOutlined } from "@ant-design/icons";
 import {
   Card,
@@ -13,19 +15,23 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
-  CardFooter,
+  useToast,
 } from "@chakra-ui/react";
 
 import { InformationTable } from "./InformationTable";
+import { InformationOverview } from "./InformationOverview";
 
 import { useCopyText } from "@/hooks/useCopyText";
 
 import { shortenAddress } from "@/utils/address";
-
-import { GoPlusTokenResponse, SupportedChainId } from "./models";
-import { InformationOverview } from "./InformationOverview";
 import { ChainInfo } from "./constants";
-// import GoPlusLogo from "@/assets/goplus-logo.png";
+
+import {
+  DexToolsTokenResponse,
+  DexToolsTokenInfoResponse,
+  GoPlusTokenResponse,
+  SupportedChainId,
+} from "./models";
 
 interface Props {
   scanResponse: GoPlusTokenResponse;
@@ -63,10 +69,95 @@ export const Information: React.FC<Props> = ({
   } = scanResponse;
 
   const [copyContent] = useCopyText();
+  const toast = useToast();
 
   const info = ChainInfo[chainId as keyof typeof ChainInfo];
-
   const isEmptyResponse = Object.keys(scanResponse).length === 0;
+
+  const { data: tokenInfoResponse, isFetching: isTokenInfoLoading } = useQuery<
+    DexToolsTokenInfoResponse,
+    {}
+  >(
+    [chainId, contractAddress, "info"],
+    async () => {
+      const request = await axios.get(`/api/token/info`, {
+        params: {
+          chain: info.dext,
+          contractAddress,
+        },
+      });
+      const response = await request.data;
+      // console.log(response, "response");
+      return response;
+    },
+    {
+      onError: (error: any) => {
+        if (error.response) {
+          toast({
+            title:
+              error.response?.data?.description ??
+              `Something went wrong! Please try Again`,
+            status: "error",
+          });
+
+          return error.response?.data?.description;
+        }
+        toast({
+          title: error.message ?? `Something went wrong! Please try Again`,
+          status: "error",
+        });
+
+        return error.message;
+      },
+      enabled: !!chainId && !isEmptyResponse,
+      refetchOnWindowFocus: false,
+    }
+  );
+
+  const { data: tokenResponse, isFetching: isTokenLoading } = useQuery<
+    DexToolsTokenResponse,
+    {}
+  >(
+    [chainId, contractAddress, "token"],
+    async () => {
+      const request = await axios.get(`/api/token`, {
+        params: {
+          chain: info.dext,
+          contractAddress,
+        },
+      });
+      const response = await request.data;
+      // console.log(response, "response");
+      return response;
+    },
+    {
+      onError: (error: any) => {
+        if (error.response) {
+          toast({
+            title:
+              error.response?.data?.description ??
+              `Something went wrong! Please try Again`,
+            status: "error",
+          });
+
+          return error.response?.data?.description;
+        }
+        toast({
+          title: error.message ?? `Something went wrong! Please try Again`,
+          status: "error",
+        });
+
+        return error.message;
+      },
+      enabled: !!chainId && !isEmptyResponse,
+      refetchOnWindowFocus: false,
+    }
+  );
+
+  const tax = {
+    buy: buy_tax ? Number(buy_tax) * 100 : "-",
+    sell: sell_tax ? Number(sell_tax) * 100 : "-",
+  };
 
   return (
     <div className="w-full lg:w-[85%] mx-auto mt-10 relative">
@@ -116,71 +207,126 @@ export const Information: React.FC<Props> = ({
           <div className="w-full h-full sm:w-1/2 mt-4 sm:mt-0">
             <Card className="w-full h-full bg-dark-secondary rounded-lg text-white">
               <CardHeader className="pb-0 font-semibold text-xl">
-                Project!
+                Project
               </CardHeader>
               <CardBody>
+                <div className="w-full flex flex-wrap justify-between items-center mb-4">
+                  <div className="w-full md:w-3/5">
+                    <div className="w-full flex font-semibold">
+                      <div
+                        className="py-1 px-3 bg-gray-300 font-bold rounded-lg my-auto text-black"
+                        style={{ fontSize: "1.5em" }}
+                      >
+                        {token_name ? token_name[0] : "-"}
+                      </div>
+                      <div className="ml-3 flex flex-col">
+                        <div>{token_name?.toUpperCase() ?? "-"}</div>
+                        <div>{token_symbol?.toUpperCase() ?? "-"}</div>
+                      </div>
+                    </div>
+                    <List spacing={2} className="mt-3">
+                      <ListItem className="w-full flex justify-between">
+                        <div className="w-1/3 sm:w-2/5">Creator</div>
+                        <Link
+                          href={`${info.explorer}/address/${
+                            creator_address ?? "-"
+                          }`}
+                          rel="noopener noreferrer"
+                          target="_blank"
+                          className="w-3/5 sm:w-[55%] text-right text-blue-500 underline underline-offset-4"
+                        >
+                          {creator_address
+                            ? shortenAddress(creator_address, 3)
+                            : "unknown"}
+                        </Link>
+                      </ListItem>
+                      <ListItem className="w-full flex justify-between">
+                        <div className="w-1/3 sm:w-2/5">Owner</div>
+                        <Link
+                          href={`${info.explorer}/address/${
+                            owner_address ?? "-"
+                          }`}
+                          rel="noopener noreferrer"
+                          target="_blank"
+                          className="w-3/5 sm:w-[55%] text-right text-blue-500 underline underline-offset-4"
+                        >
+                          {owner_address
+                            ? shortenAddress(owner_address, 3)
+                            : "unknown"}
+                        </Link>
+                      </ListItem>
+                      <ListItem className="w-full flex justify-between">
+                        <div className="w-1/3 sm:w-2/5">Explorer</div>
+                        <Link
+                          href={`${info.explorer}/token/${
+                            contractAddress ?? "-"
+                          }`}
+                          rel="noopener noreferrer"
+                          target="_blank"
+                          className="w-3/5 sm:w-[55%] text-right text-blue-500 underline underline-offset-4"
+                        >
+                          {contractAddress
+                            ? shortenAddress(contractAddress, 3)
+                            : "unknown"}
+                        </Link>
+                      </ListItem>
+
+                      {dex && Boolean(dex.length) && (
+                        <ListItem className="w-full flex justify-between">
+                          <div className="w-1/3 sm:w-2/5">Pair</div>
+                          <Link
+                            href={`${urls.dexTools}/${info.dext}/pair-explorer/${dex[0].pair}`}
+                            rel="noopener noreferrer"
+                            target="_blank"
+                            className="w-3/5 sm:w-[55%] text-right text-blue-500 underline underline-offset-4"
+                          >
+                            {shortenAddress(dex[0].pair, 3)}
+                          </Link>
+                        </ListItem>
+                      )}
+                    </List>
+                  </div>
+
+                  <Divider
+                    orientation="vertical"
+                    className="hidden md:block h-48 border border-white"
+                  />
+
+                  <List className="w-full md:w-[35%] mt-4 md:mt-0" spacing={2}>
+                    <ListItem className="w-full flex flex-col">
+                      <div className="w-full">Decimals</div>
+                      <div className="w-full">
+                        {tokenResponse?.data?.decimals
+                          ? Number(
+                              tokenResponse?.data?.decimals
+                            ).toLocaleString("en-US")
+                          : "-"}
+                      </div>
+                    </ListItem>
+
+                    <ListItem className="w-full flex flex-col">
+                      <div className="w-full">Total Supply</div>
+                      <div className="w-full">
+                        {total_supply
+                          ? Number(total_supply).toLocaleString("en-US")
+                          : "-"}
+                      </div>
+                    </ListItem>
+
+                    <ListItem className="w-full flex flex-col">
+                      <div className="w-full">Circulating Supply</div>
+                      <div className="w-full">
+                        {tokenInfoResponse?.data?.circulatingSupply
+                          ? Number(
+                              tokenInfoResponse?.data?.circulatingSupply
+                            ).toLocaleString("en-US")
+                          : "-"}
+                      </div>
+                    </ListItem>
+                  </List>
+                </div>
+
                 <List spacing={3}>
-                  <ListItem className="w-full flex justify-between">
-                    <div className="w-1/3 sm:w-2/5">Name</div>
-                    <div className="w-3/5 sm:w-[55%] text-right font-bold">
-                      {token_name?.toUpperCase() ?? "-"}
-                    </div>
-                  </ListItem>
-                  <ListItem className="w-full flex justify-between">
-                    <div className="w-1/3 sm:w-2/5">Symbol</div>
-                    <div className="w-3/5 sm:w-[55%] text-right font-bold">
-                      $ {token_symbol?.toUpperCase() ?? "-"}
-                    </div>
-                  </ListItem>
-                  <ListItem className="w-full flex justify-between">
-                    <div className="w-1/3 sm:w-2/5">Total Supply</div>
-                    <div className="w-3/5 sm:w-[55%] text-right">
-                      {total_supply
-                        ? Number(total_supply).toLocaleString("en-US")
-                        : "-"}
-                    </div>
-                  </ListItem>
-                  <ListItem className="w-full flex justify-between">
-                    <div className="w-1/3 sm:w-2/5">Creator</div>
-                    <Link
-                      href={`${info.explorer}/address/${
-                        creator_address ?? "-"
-                      }`}
-                      rel="noopener noreferrer"
-                      target="_blank"
-                      className="w-3/5 sm:w-[55%] text-right text-blue-500 underline underline-offset-4"
-                    >
-                      {creator_address
-                        ? shortenAddress(creator_address)
-                        : "unknown"}
-                    </Link>
-                  </ListItem>
-                  <ListItem className="w-full flex justify-between">
-                    <div className="w-1/3 sm:w-2/5">Owner</div>
-                    <Link
-                      href={`${info.explorer}/address/${owner_address ?? "-"}`}
-                      rel="noopener noreferrer"
-                      target="_blank"
-                      className="w-3/5 sm:w-[55%] text-right text-blue-500 underline underline-offset-4"
-                    >
-                      {owner_address
-                        ? shortenAddress(owner_address)
-                        : "unknown"}
-                    </Link>
-                  </ListItem>
-                  <ListItem className="w-full flex justify-between">
-                    <div className="w-1/3 sm:w-2/5">Explorer</div>
-                    <Link
-                      href={`${info.explorer}/token/${contractAddress ?? "-"}`}
-                      rel="noopener noreferrer"
-                      target="_blank"
-                      className="w-3/5 sm:w-[55%] text-right text-blue-500 underline underline-offset-4"
-                    >
-                      {contractAddress
-                        ? shortenAddress(contractAddress)
-                        : "unknown"}
-                    </Link>
-                  </ListItem>
                   <ListItem className="w-full flex justify-between">
                     <div className="w-1/3 sm:w-2/5">Honeypot Test</div>
                     <div className="w-3/5 sm:w-[55%] text-right font-bold">
@@ -191,25 +337,64 @@ export const Information: React.FC<Props> = ({
                       )}
                     </div>
                   </ListItem>
+
+                  <ListItem className="w-full flex justify-between">
+                    <div className="w-1/3 sm:w-2/5">Market Cap</div>
+                    <div className="w-3/5 sm:w-[55%] text-right font-bold">
+                      {tokenInfoResponse?.data?.mcap
+                        ? `$ ${Number(
+                            tokenInfoResponse?.data?.mcap.toFixed(2)
+                          ).toLocaleString("en-US")}`
+                        : "-"}
+                    </div>
+                  </ListItem>
+
+                  <ListItem className="w-full flex justify-between">
+                    <div className="w-1/3 sm:w-2/5">Transactions</div>
+                    <div className="w-3/5 sm:w-[55%] text-right font-bold">
+                      {tokenInfoResponse?.data?.transactions
+                        ? Number(
+                            tokenInfoResponse?.data?.transactions
+                          ).toLocaleString("en-US")
+                        : "-"}
+                    </div>
+                  </ListItem>
                 </List>
                 <Divider className="my-4" />
-                <div className="w-full">
-                  <div>Tax Rate</div>
-                  <div className="w-[12em] flex justify-between mt-3 font-semibold">
-                    <div className="border border-white rounded-lg p-2">
-                      {!!buy_tax ? (Number(buy_tax) * 100).toFixed(1) : "-"} %
-                      Buy
-                    </div>
-                    <div className="border border-white rounded-lg p-2">
-                      {!!sell_tax ? (Number(sell_tax) * 100).toFixed(1) : "-"} %
-                      Sell
-                    </div>
+                <div className="w-full flex flex-wrap">
+                  <div>
+                    Buy Tax :
+                    <span
+                      className={`ml-1 font-semibold ${
+                        typeof tax.buy === "number" && tax.buy > 10
+                          ? "text-red-500"
+                          : "text-green-500"
+                      }`}
+                    >
+                      {!!buy_tax ? (Number(buy_tax) * 100).toFixed(1) : "-"}%
+                    </span>
+                  </div>
+                  <span className="mx-2 text-base">/</span>
+                  <div>
+                    Sell Tax :
+                    <span
+                      className={`ml-1 font-semibold ${
+                        typeof tax.sell === "number" && tax.sell > 10
+                          ? "text-red-500"
+                          : "text-green-500"
+                      }`}
+                    >
+                      {!!sell_tax ? (Number(sell_tax) * 100).toFixed(1) : "-"}%
+                    </span>
+                  </div>
+                  <div className="mt-2">
+                    More than 10% is considered a high tax rate, and anything
+                    beyond 50% tax rate means it may not be tradable.
                   </div>
                 </div>
               </CardBody>
-              <CardFooter className="w-full pt-0">
+              {/* <CardFooter className="w-full pt-0">
                 <div className="w-full flex flex-wrap justify-center mx-auto">
-                  {/* md:w-4/5 lg:w-3/4 xl:w-3/5 2xl:w-1/2 */}
                   {dex && Boolean(dex.length) && (
                     <Link
                       href={`${urls.dexTools}/${info.dext}/pair-explorer/${dex[0].pair}`}
@@ -243,7 +428,7 @@ export const Information: React.FC<Props> = ({
                     </Link>
                   )}
                 </div>
-              </CardFooter>
+              </CardFooter> */}
             </Card>
 
             <InformationTable
@@ -256,6 +441,11 @@ export const Information: React.FC<Props> = ({
           </div>
           <div className="w-full h-full sm:w-[47.5%] mt-4 sm:mt-0">
             <InformationOverview scanResponse={scanResponse} />
+
+            {/* <iframe
+              className="w-full h-full"
+              src="https://www.dextools.io/widgets/en/ether/pe-light/0x1E053b6d2f0a578505BFD8bfE344295a9A08BbD2?theme=dark&chartType=1&chartResolution=30&drawingToolbars=false&headerColor=1f2123&tvPlatformColor=1f2123&tvPaneColor=15171B"
+            /> */}
 
             <InformationTable
               chainExplorer={info.explorer}

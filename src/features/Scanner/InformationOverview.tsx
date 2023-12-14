@@ -1,4 +1,7 @@
-import { CheckCircleOutlined, WarningOutlined } from "@ant-design/icons";
+import {
+  CheckCircleOutlined,
+  ExclamationCircleOutlined,
+} from "@ant-design/icons";
 import {
   Card,
   CardHeader,
@@ -54,13 +57,13 @@ export const InformationOverview: React.FC<Props> = ({ scanResponse }) => {
   return (
     <Card className="w-full h-full bg-dark-secondary rounded-lg text-white">
       <CardHeader className="pb-0 font-semibold text-xl">
-        Contract Review!
+        Contract Security!
       </CardHeader>
       <CardBody>
         <List spacing={3}>
           <ListItem className="flex items-baseline">
             <ListIcon
-              as={isRenounced ? CheckCircleOutlined : WarningOutlined}
+              as={isRenounced ? CheckCircleOutlined : ExclamationCircleOutlined}
               className={`${isRenounced ? "text-green-500" : "text-red-500"}`}
             />
             <div className="w-11/12 flex justify-between">
@@ -72,11 +75,15 @@ export const InformationOverview: React.FC<Props> = ({ scanResponse }) => {
           </ListItem>
           <ListItem className="flex items-baseline">
             <ListIcon
-              as={isOpenSource ? CheckCircleOutlined : WarningOutlined}
+              as={
+                isOpenSource ? CheckCircleOutlined : ExclamationCircleOutlined
+              }
               className={`${isOpenSource ? "text-green-500" : "text-red-500"}`}
             />
             <div className="w-11/12 flex justify-between">
-              <div className="w-2/5 sm:w-1/2">Open source</div>
+              <div className="w-2/5 sm:w-1/2">
+                Verified contract source code
+              </div>
               <div className="w-1/4 sm:w-2/5 text-right">
                 {isOpenSource ? "YES" : "NO"}
               </div>
@@ -84,7 +91,7 @@ export const InformationOverview: React.FC<Props> = ({ scanResponse }) => {
           </ListItem>
           <ListItem className="flex items-baseline">
             <ListIcon
-              as={isAntiWhale ? CheckCircleOutlined : WarningOutlined}
+              as={isAntiWhale ? CheckCircleOutlined : ExclamationCircleOutlined}
               className={`${isAntiWhale ? "text-green-500" : "text-red-500"}`}
             />
             <div className="w-11/12 flex justify-between">
@@ -96,7 +103,11 @@ export const InformationOverview: React.FC<Props> = ({ scanResponse }) => {
           </ListItem>
           <ListItem className="flex items-baseline">
             <ListIcon
-              as={!isSlippageModifiable ? CheckCircleOutlined : WarningOutlined}
+              as={
+                !isSlippageModifiable
+                  ? CheckCircleOutlined
+                  : ExclamationCircleOutlined
+              }
               className={`${
                 !isSlippageModifiable ? "text-green-500" : "text-red-500"
               }`}
@@ -110,13 +121,15 @@ export const InformationOverview: React.FC<Props> = ({ scanResponse }) => {
           </ListItem>
           <ListItem className="flex items-baseline">
             <ListIcon
-              as={!isHiddenOwner ? CheckCircleOutlined : WarningOutlined}
+              as={
+                !isHiddenOwner ? CheckCircleOutlined : ExclamationCircleOutlined
+              }
               className={`${
                 !isHiddenOwner ? "text-green-500" : "text-red-500"
               }`}
             />
             <div className="w-11/12 flex justify-between">
-              <div className="w-2/5 sm:w-1/2">Hidden owner</div>
+              <div className="w-2/5 sm:w-1/2">Hidden owner address</div>
               <div className="w-1/4 sm:w-2/5 text-right">
                 {isHiddenOwner ? "YES" : "NO"}
               </div>
@@ -124,7 +137,11 @@ export const InformationOverview: React.FC<Props> = ({ scanResponse }) => {
           </ListItem>
           <ListItem className="flex items-baseline">
             <ListIcon
-              as={!isTradingCooldown ? CheckCircleOutlined : WarningOutlined}
+              as={
+                !isTradingCooldown
+                  ? CheckCircleOutlined
+                  : ExclamationCircleOutlined
+              }
               className={`${
                 !isTradingCooldown ? "text-green-500" : "text-red-500"
               }`}
@@ -138,7 +155,9 @@ export const InformationOverview: React.FC<Props> = ({ scanResponse }) => {
           </ListItem>
           <ListItem className="flex items-baseline">
             <ListIcon
-              as={!isBlacklist ? CheckCircleOutlined : WarningOutlined}
+              as={
+                !isBlacklist ? CheckCircleOutlined : ExclamationCircleOutlined
+              }
               className={`${!isBlacklist ? "text-green-500" : "text-red-500"}`}
             />
             <div className="w-11/12 flex justify-between">
@@ -150,7 +169,9 @@ export const InformationOverview: React.FC<Props> = ({ scanResponse }) => {
           </ListItem>
           <ListItem className="flex items-baseline">
             <ListIcon
-              as={!isWhitelist ? CheckCircleOutlined : WarningOutlined}
+              as={
+                !isWhitelist ? CheckCircleOutlined : ExclamationCircleOutlined
+              }
               className={`${!isWhitelist ? "text-green-500" : "text-red-500"}`}
             />
             <div className="w-11/12 flex justify-between">
@@ -162,11 +183,11 @@ export const InformationOverview: React.FC<Props> = ({ scanResponse }) => {
           </ListItem>
           <ListItem className="flex items-baseline">
             <ListIcon
-              as={!isProxy ? CheckCircleOutlined : WarningOutlined}
+              as={!isProxy ? CheckCircleOutlined : ExclamationCircleOutlined}
               className={`${!isProxy ? "text-green-500" : "text-red-500"}`}
             />
             <div className="w-11/12 flex justify-between">
-              <div className="w-2/5 sm:w-1/2">Proxy contract</div>
+              <div className="w-2/5 sm:w-1/2">Proxy found</div>
               <div className="w-1/4 sm:w-2/5 text-right">
                 {isProxy ? "YES" : "NO"}
               </div>
@@ -174,11 +195,11 @@ export const InformationOverview: React.FC<Props> = ({ scanResponse }) => {
           </ListItem>
           <ListItem className="flex items-baseline">
             <ListIcon
-              as={!isMintable ? CheckCircleOutlined : WarningOutlined}
+              as={!isMintable ? CheckCircleOutlined : ExclamationCircleOutlined}
               className={`${!isMintable ? "text-green-500" : "text-red-500"}`}
             />
             <div className="w-11/12 flex justify-between">
-              <div className="w-2/5 sm:w-1/2">Mintable</div>
+              <div className="w-2/5 sm:w-1/2">Mint function</div>
               <div className="w-1/4 sm:w-2/5 text-right">
                 {isMintable ? "YES" : "NO"}
               </div>
@@ -186,7 +207,11 @@ export const InformationOverview: React.FC<Props> = ({ scanResponse }) => {
           </ListItem>
           <ListItem className="flex items-baseline">
             <ListIcon
-              as={!isTransferPausable ? CheckCircleOutlined : WarningOutlined}
+              as={
+                !isTransferPausable
+                  ? CheckCircleOutlined
+                  : ExclamationCircleOutlined
+              }
               className={`${
                 !isTransferPausable ? "text-green-500" : "text-red-500"
               }`}
@@ -200,7 +225,9 @@ export const InformationOverview: React.FC<Props> = ({ scanResponse }) => {
           </ListItem>
           <ListItem className="flex items-baseline">
             <ListIcon
-              as={!isCantSellAll ? CheckCircleOutlined : WarningOutlined}
+              as={
+                !isCantSellAll ? CheckCircleOutlined : ExclamationCircleOutlined
+              }
               className={`${
                 !isCantSellAll ? "text-green-500" : "text-red-500"
               }`}
@@ -214,7 +241,11 @@ export const InformationOverview: React.FC<Props> = ({ scanResponse }) => {
           </ListItem>
           <ListItem className="flex items-baseline">
             <ListIcon
-              as={!isSameOwnerHoneypot ? CheckCircleOutlined : WarningOutlined}
+              as={
+                !isSameOwnerHoneypot
+                  ? CheckCircleOutlined
+                  : ExclamationCircleOutlined
+              }
               className={`${
                 !isSameOwnerHoneypot ? "text-green-500" : "text-red-500"
               }`}
@@ -228,13 +259,19 @@ export const InformationOverview: React.FC<Props> = ({ scanResponse }) => {
           </ListItem>
           <ListItem className="flex items-baseline">
             <ListIcon
-              as={!isOwnerChangeBalance ? CheckCircleOutlined : WarningOutlined}
+              as={
+                !isOwnerChangeBalance
+                  ? CheckCircleOutlined
+                  : ExclamationCircleOutlined
+              }
               className={`${
                 !isOwnerChangeBalance ? "text-green-500" : "text-red-500"
               }`}
             />
             <div className="w-11/12 flex justify-between">
-              <div className="w-2/5 sm:w-1/2">Owner can change balance</div>
+              <div className="w-2/5 sm:w-1/2">
+                Owner contract can modify balance
+              </div>
               <div className="w-1/4 sm:w-2/5 text-right">
                 {isOwnerChangeBalance ? "YES" : "NO"}
               </div>
@@ -242,7 +279,11 @@ export const InformationOverview: React.FC<Props> = ({ scanResponse }) => {
           </ListItem>
           <ListItem className="flex items-baseline">
             <ListIcon
-              as={isTakeBackOwnership ? WarningOutlined : CheckCircleOutlined}
+              as={
+                isTakeBackOwnership
+                  ? ExclamationCircleOutlined
+                  : CheckCircleOutlined
+              }
               className={`${
                 isTakeBackOwnership ? "text-red-500" : "text-green-500"
               }`}

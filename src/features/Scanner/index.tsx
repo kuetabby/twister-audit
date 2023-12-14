@@ -133,42 +133,19 @@ const Scanner: React.FC<Props> = () => {
         <div className="w-full md:w-11/12 lg:w-[85%] mx-auto relative">
           <div className="w-full">
             <div className="text-xl sm:text-3xl !font-extrabold text-white">
-              OrdinalsFi Auditor
+              OrdinalsFi Smart Contract Auditor
             </div>
-            <div className="text-lg sm:text-xl text-white mt-4 mb-1">
-              You're one step closer to a safer portfolio.
+            <div className="text-lg sm:text-xl text-white mt-4 mb-1 max-w-lg">
+              Analyze and audit smart contract to finds errors and
+              vulnerabilities, and provides detailed reports for smart contract
+              security.
             </div>
             <div className="text-lg sm:text-xl text-white">
-              Let's get started!
+              Paste the smart contract here !
             </div>
             <div className="w-full h-full flex flex-wrap justify-between">
               <Card className="w-full h-full md:w-4/5 lg:w-3/5 xl:w-2/5 bg-dark-secondary rounded-lg mt-4">
                 <CardBody className="pb-0">
-                  {/* <div className="text-lg sm:text-xl text-white">Select One:</div>
-                <div className="w-44 flex flex-wrap justify-between mt-2 mb-6">
-                  <Button
-                    colorScheme={
-                      category === SupportedCategory.Token
-                        ? `purple`
-                        : `whiteAlpha`
-                    }
-                    className="h-8"
-                    onClick={() => onChangeCategory(SupportedCategory.Token)}
-                  >
-                    Token
-                  </Button>
-                  <Button
-                    colorScheme={
-                      category === SupportedCategory.NFT
-                        ? `purple`
-                        : `whiteAlpha`
-                    }
-                    className="h-8"
-                    onClick={() => onChangeCategory(SupportedCategory.NFT)}
-                  >
-                    NFT
-                  </Button>
-                </div> */}
                   <div className="w-full flex flex-wrap justify-between">
                     <div className="w-full sm:w-1/3 flex flex-col">
                       <div className="text-lg text-white">Select Network :</div>
@@ -268,8 +245,10 @@ const Scanner: React.FC<Props> = () => {
                       Clear
                     </Button>
                   </div>
-                  <div className="mt-4 w-full sm:w-3/4 text-white font-semibold">
-                    Note: These tools are not intended as financial advice.
+                  <div className="mt-4 w-full sm:w-4/5 text-white font-semibold">
+                    Note: It is important to note that this tool is still in
+                    beta testing and should not be used for official auditing.
+                    Utilize it at your own risk.
                   </div>
                 </CardFooter>
               </Card>
