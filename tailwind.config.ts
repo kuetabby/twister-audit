@@ -13,53 +13,39 @@ module.exports = {
     },
     extend: {
       textColor: {
-        primary: "#FF00FF",
-        secondary: "#BF00FF",
+        primary: "#001F3F",
+        secondary: "#40E0D0",
         pink: "#FF00FF",
         "dark-main": "#0A0C11",
         "dark-secondary": "rgb(19, 24, 35)",
         "light-main": "#D2D6EE",
       },
       backgroundColor: {
-        pink: "#FF00FF",
-        secondary: "#BF00FF",
+        primary: "#001F3F",
+        secondary: "#40E0D0",
         "dark-main": "#0A0C11",
         "dark-secondary": "rgb(19, 24, 35)",
         "dark-tertiary": "#205d7d",
       },
       backgroundImage: () => ({
+        app: "linear-gradient(55deg, rgba(0,31,63,1) 0%, rgba(0,0,0,1) 75%, rgba(25,25,112,1) 100%)",
+
         "dark-primary": "linear-gradient(to right, #0A0C11, rgb(19, 24, 35))",
-        "light-primary":
-          "linear-gradient(to right, #0A0C11 0%, rgb(19, 24, 35) 100%)",
         "dark-fade":
           "linear-gradient(to right, #0A0C11, #131823, rgb(19, 24, 35))",
 
-        lavender: "linear-gradient(to right, #d49cc7, #0f041a)",
-        "vibrant-purple": "linear-gradient(to right, #691e65, #57094f)",
-        "rich-purple": "linear-gradient(to right, #2f0641, #2d0533)",
-        "light-purple": "linear-gradient(to right, #84848b, #7f5295)",
-        "tone-purple": "linear-gradient(to right, #44444c, #24242c)",
-        primary:
-          "linear-gradient(55deg, rgba(105,30,101,1) 0%, rgba(87,9,79,1) 100%)",
-        secondary: "#BF00FF",
+        "night-sky": "linear-gradient(to right, #001F3F, #191970)",
+        "twilight-horizon": "linear-gradient(to right, #4169E1, #40E0D0)",
+        "starry-night": "linear-gradient(to right, #003366, #6A0DAD, #7DF9FF)",
+        "celestial-aura": "linear-gradient(to right, #00FFEF, #002147)",
+
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-conic":
+          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       }),
-      width: {
-        "10%": "10%",
-        "12.5%": "12.5%",
-        "30%": "30%",
-        "45%": "45%",
-        "55%": "55%",
-        "60%": "60%",
-      },
-      height: {
-        "10%": "10%",
-        "30%": "30%",
-        "45%": "45%",
-        "60%": "60%",
-      },
       borderColor: {
-        primary: "#FF00FF",
-        secondary: "#BF00FF",
+        primary: "#001F3F",
+        secondary: "#40E0D0",
         "dark-main": "#8F8686",
         "light-main": "#D2D6EE",
       },

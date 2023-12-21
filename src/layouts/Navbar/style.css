@@ -1,11 +1,12 @@
 .navbar-container {
-  @apply !px-0 w-full !h-[4.5em] sm:!h-20 !bg-dark-secondary relative z-50;
+  @apply !px-0 w-full !h-[4.5em] sm:!h-20 !bg-dark-main;
+  @apply sticky top-0 z-50 border-b border-b-slate-700;
 }
 
 .navbar,
 .navbar-scroll {
-  @apply max-w-screen-2xl w-full m-auto;
-  @apply flex flex-nowrap justify-start items-center;
+  @apply max-w-screen-2xl w-full h-full m-auto;
+  @apply flex flex-nowrap justify-between items-center;
   @apply px-2;
 
   z-index: 1000;
@@ -21,20 +22,11 @@
 }
 
 .navbar-scroll {
-  @apply fixed py-2 bg-dark-secondary opacity-95;
-  @apply top-0 left-[50%];
-  transform: translate(-50%, 0%);
-  /* background: linear-gradient(
-    180deg,
-    rgba(60, 60, 60, 1) 0%,
-    rgba(56, 56, 56, 1) 33%,
-    rgba(68, 68, 68, 1) 66%,
-    rgba(36, 36, 36, 1) 100%
-  ); */
+  @apply py-2  bg-dark-main opacity-95;
 }
 
 .navbar-title {
-  @apply bg-light-purple font-bold;
+  @apply bg-twilight-horizon;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

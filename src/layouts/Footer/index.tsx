@@ -12,7 +12,7 @@ import TwitterLogo from "@/assets/logo-twitter.png";
 import TelegramLogo from "@/assets/logo-telegram.png";
 import MediumLogo from "@/assets/logo-medium.png";
 
-import { grotesk } from "@/utils/font";
+import { montserrat } from "@/utils/font";
 
 import "./style.css";
 
@@ -25,7 +25,7 @@ const AppFooter: React.FC<Props> = () => {
 
   return (
     <footer
-      className={clsx("app-footer bg-dark-fade", grotesk.className)}
+      className={clsx("app-footer bg-dark-fade", montserrat.className)}
       // style={{
       //   background:
       //     "linear-gradient(180deg, rgba(60,60,60,1) 0%, rgba(56,56,56,1) 33%, rgba(68,68,68,1) 66%, rgba(36,36,36,1) 100%)",

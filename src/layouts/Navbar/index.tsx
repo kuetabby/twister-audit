@@ -7,7 +7,7 @@ import clsx from "clsx";
 
 import PageTabs from "../PageTabs";
 
-import { grotesk } from "@/utils/font";
+import { montserrat } from "@/utils/font";
 
 import AppLogo from "@/assets/logo-app.png";
 
@@ -38,11 +38,11 @@ const Navbar: React.FC<Props> = () => {
   };
 
   return (
-    <div className={clsx("navbar-container", grotesk.className)}>
+    <div className={clsx("navbar-container", montserrat.className)}>
       <div className={clsx(isScroll ? "navbar-scroll" : "navbar")}>
         <div className="w-1/4 sm:w-[70%] flex items-center">
           <Link
-            href="https://ordinalsfi.io/"
+            href="https://twistercash.tech"
             className={`logo-container text-white`}
           >
             <Image
@@ -56,7 +56,7 @@ const Navbar: React.FC<Props> = () => {
 
         {/* small devices */}
         <div className="sm:hidden w-full text-xl xs:text-3xl font-extrabold navbar-title">
-          OrdinalsFi Auditor
+          Twister Cash Audit Tools
         </div>
       </div>
     </div>

@@ -178,7 +178,7 @@ export const Information: React.FC<Props> = ({
         </div>
         <div className="w-full sm:w-60 flex flex-wrap justify-around sm:justify-between mx-auto sm:mx-0 mt-4 sm:mt-0">
           <Button
-            className={`w-5/12 sm:w-[45%] h-8 text-white disabled:bg-light-purple`}
+            className={`w-5/12 sm:w-[45%] h-8 text-white`}
             onClick={scanRefetch}
             colorScheme="blue"
           >

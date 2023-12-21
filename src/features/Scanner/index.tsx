@@ -133,12 +133,11 @@ const Scanner: React.FC<Props> = () => {
         <div className="w-full md:w-11/12 lg:w-[85%] mx-auto relative">
           <div className="w-full">
             <div className="text-xl sm:text-3xl !font-extrabold text-white">
-              OrdinalsFi Smart Contract Auditor
+              Twister Cash Audit Tools
             </div>
             <div className="text-lg sm:text-xl text-white mt-4 mb-1 max-w-lg">
-              Analyze and audit smart contract to finds errors and
-              vulnerabilities, and provides detailed reports for smart contract
-              security.
+              Conduct comprehensive analyses and audits on smart contracts to
+              identify potential errors and vulnerabilities.
             </div>
             <div className="text-lg sm:text-xl text-white">
               Paste the smart contract here !
@@ -246,9 +245,9 @@ const Scanner: React.FC<Props> = () => {
                     </Button>
                   </div>
                   <div className="mt-4 w-full sm:w-4/5 text-white font-semibold">
-                    Note: It is important to note that this tool is still in
-                    beta testing and should not be used for official auditing.
-                    Utilize it at your own risk.
+                    Please be aware that this tool is not designed for formal
+                    auditing purposes. Users are advised to use it with
+                    discretion and at their own risk.
                   </div>
                 </CardFooter>
               </Card>

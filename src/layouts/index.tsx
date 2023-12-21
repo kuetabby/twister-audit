@@ -5,11 +5,11 @@ import clsx from "clsx";
 import { ArrowUpOutlined } from "@ant-design/icons";
 
 import Navbar from "./Navbar";
-import Footer from "./Footer";
+// import Footer from "./Footer";
 
 import Provider from "@/library/Provider";
 
-import { grotesk } from "@/utils/font";
+import { montserrat } from "@/utils/font";
 
 import "./style.css";
 
@@ -49,7 +49,7 @@ const BaseLayout: React.FC<Props> = ({ children }) => {
   return (
     <Provider>
       <Navbar />
-      <main className={clsx("base-main-container", grotesk.className)}>
+      <main className={clsx("base-main-container", montserrat.className)}>
         {children}
 
         <div
@@ -67,7 +67,7 @@ const BaseLayout: React.FC<Props> = ({ children }) => {
           </Button>
         </div>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </Provider>
   );
 };

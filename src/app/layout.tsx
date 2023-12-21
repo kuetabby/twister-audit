@@ -5,9 +5,9 @@ import BaseLayout from "@/layouts";
 
 import "./globals.css";
 
-const app_title = "OrdinalsFi - Smart Contract Auditor dApp";
-const app_name = "OrdinalsFi";
-const description = "Smart Contract Auditor dApp by OrdinalsFi";
+const app_title = "Twister Cash - Audit Tools";
+const app_name = "Twister Cash";
+const description = "Smart Contract Auditor dApp by Twister Cash";
 
 export const metadata: Metadata = {
   title: app_title,

@@ -4,14 +4,14 @@
 }
 
 .nav-anchor {
-  @apply bg-white hover:bg-light-purple font-bold;
+  @apply bg-white hover:bg-twilight-horizon font-bold;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .nav-anchor-active {
-  @apply bg-light-purple font-bold;
+  @apply bg-twilight-horizon font-bold;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
