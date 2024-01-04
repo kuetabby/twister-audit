@@ -8,3 +8,10 @@
   @apply w-full h-full bg-center;
   @apply absolute top-0 left-0 bg-cover bg-no-repeat;
 }
+
+.scanner-title {
+  @apply bg-twilight-horizon font-semibold;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

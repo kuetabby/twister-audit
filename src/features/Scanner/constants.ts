@@ -4,14 +4,14 @@ import BscLogo from "@/assets/logo-bnb.webp";
 import BaseLogo from "@/assets/logo-base.png";
 import AvalancheLogo from "@/assets/logo-avalanche.webp";
 // import CronosLogo from "@/assets/logo-cronos.png";
-// import FantomLogo from "@/assets/logo-fantom.png";
+import FantomLogo from "@/assets/logo-fantom.png";
 // import GnosisLogo from "@/assets/logo-gnosis.png";
 // import HecoLogo from "@/assets/logo-heco.png";
 // import KucoinLogo from "@/assets/logo-kucoin.png";
 // import LineaLogo from "@/assets/logo-linea.png";
 // import OkcLogo from "@/assets/logo-okc.png";
-// import PolygonLogo from "@/assets/logo-polygon.png";
-// import OptimismLogo from "@/assets/logo-optimism.webp";
+import PolygonLogo from "@/assets/logo-polygon.png";
+import OptimismLogo from "@/assets/logo-optimism.webp";
 // import UltronLogo from "@/assets/logo-ultron.png";
 // import zkSyncLogo from "@/assets/logo-zksync.png";
 
@@ -26,6 +26,7 @@ export const ChainInfo = {
     dexs: "ethereum",
     dexv: "eth",
     dext: "ether",
+    dexapi: "ether",
   },
   [SupportedChainId.ARBITRUM]: {
     label: "Arbitrum",
@@ -35,6 +36,7 @@ export const ChainInfo = {
     dexs: "arbitrum",
     dexv: "arbitrum",
     dext: "arbitrum",
+    dexapi: "arbitrum",
   },
   [SupportedChainId.BASE]: {
     label: "Base",
@@ -44,6 +46,7 @@ export const ChainInfo = {
     dexs: "base",
     dexv: "",
     dext: "base",
+    dexapi: "base",
   },
   [SupportedChainId.BSC]: {
     label: "Binance Smart Chain",
@@ -53,6 +56,7 @@ export const ChainInfo = {
     dexs: "bsc",
     dexv: "bsc",
     dext: "bnb",
+    dexapi: "bsc",
   },
   [SupportedChainId.AVALANCHE]: {
     label: "Avalanche",
@@ -62,6 +66,7 @@ export const ChainInfo = {
     dexs: "avalanche",
     dexv: "",
     dext: "avalanche",
+    dexapi: "avalanche",
   },
   // [SupportedChainId.OKC]: {
   //   label: "Okc",
@@ -99,24 +104,26 @@ export const ChainInfo = {
   //   dexv: "",
   //   dext: "heco",
   // },
-  // [SupportedChainId.POLYGON]: {
-  //   label: "Polygon",
-  //   code: "MATIC",
-  //   logo: PolygonLogo,
-  //   explorer: "https://polygonscan.com",
-  //   dexs: "polygon",
-  //   dexv: "",
-  //   dext: "polygon",
-  // },
-  // [SupportedChainId.FANTOM]: {
-  //   label: "Fantom",
-  //   code: "FTM",
-  //   logo: FantomLogo,
-  //   explorer: "https://ftmscan.com",
-  //   dexs: "fantom",
-  //   dexv: "",
-  //   dext: "fantom",
-  // },
+  [SupportedChainId.POLYGON]: {
+    label: "Polygon",
+    code: "MATIC",
+    logo: PolygonLogo,
+    explorer: "https://polygonscan.com",
+    dexs: "polygon",
+    dexv: "",
+    dext: "polygon",
+    dexapi: "polygon",
+  },
+  [SupportedChainId.FANTOM]: {
+    label: "Fantom",
+    code: "FTM",
+    logo: FantomLogo,
+    explorer: "https://ftmscan.com",
+    dexs: "fantom",
+    dexv: "",
+    dext: "fantom",
+    dexapi: "fantom",
+  },
   // [SupportedChainId.KCC]: {
   //   label: "Kcc",
   //   code: "KCC",
@@ -153,15 +160,16 @@ export const ChainInfo = {
   //   dexv: "",
   //   dext: "tron",
   // },
-  // [SupportedChainId.OPTIMISM]: {
-  //   label: "Optimism",
-  //   code: "OPTIMISM",
-  //   logo: OptimismLogo,
-  //   explorer: "https://optimistic.etherscan.io",
-  //   dexs: "optimism",
-  //   dexv: "",
-  //   dext: "optimism",
-  // },
+  [SupportedChainId.OPTIMISM]: {
+    label: "Optimism",
+    code: "OPTIMISM",
+    logo: OptimismLogo,
+    explorer: "https://optimistic.etherscan.io",
+    dexs: "optimism",
+    dexv: "",
+    dext: "optimism",
+    dexapi: "optimism",
+  },
   // [SupportedChainId.OPBNB]: {
   //   label: "opBNB",
   //   code: "0101",
@@ -228,18 +236,18 @@ export const ChainList = [
   //   code: "HT",
   //   logo: HecoLogo,
   // },
-  // {
-  //   chainId: SupportedChainId.POLYGON,
-  //   label: "Polygon",
-  //   code: "MATIC",
-  //   logo: PolygonLogo,
-  // },
-  // {
-  //   chainId: SupportedChainId.FANTOM,
-  //   label: "Fantom",
-  //   code: "FTM",
-  //   logo: FantomLogo,
-  // },
+  {
+    chainId: SupportedChainId.POLYGON,
+    label: "Polygon",
+    code: "MATIC",
+    logo: PolygonLogo,
+  },
+  {
+    chainId: SupportedChainId.FANTOM,
+    label: "Fantom",
+    code: "FTM",
+    logo: FantomLogo,
+  },
   // {
   //   chainId: SupportedChainId.KCC,
   //   label: "Kcc",
@@ -270,10 +278,10 @@ export const ChainList = [
   //   code: "0101",
   //   logo: BscLogo,
   // },
-  // {
-  //   chainId: SupportedChainId.OPTIMISM,
-  //   label: "Optimism",
-  //   code: "OPTIMISM",
-  //   logo: OptimismLogo,
-  // },
+  {
+    chainId: SupportedChainId.OPTIMISM,
+    label: "Optimism",
+    code: "OPTIMISM",
+    logo: OptimismLogo,
+  },
 ];

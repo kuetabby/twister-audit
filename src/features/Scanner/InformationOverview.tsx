@@ -1,6 +1,6 @@
 import { Card, CardHeader, CardBody, List, ListItem } from "@chakra-ui/react";
 
-import { AddressZero } from "@/utils/address";
+import { deadAddress, zeroAddress } from "@/utils/address";
 
 import { GoPlusTokenResponse } from "./models";
 
@@ -27,7 +27,9 @@ export const InformationOverview: React.FC<Props> = ({ scanResponse }) => {
     can_take_back_ownership,
   } = scanResponse;
 
-  const isRenounced = owner_address && owner_address === AddressZero;
+  const isRenounced =
+    owner_address &&
+    (owner_address === zeroAddress || owner_address === deadAddress);
   const isOpenSource = !!Number(is_open_source);
   const isAntiWhale = !!Number(is_anti_whale);
   const isSlippageModifiable = !!Number(slippage_modifiable);
@@ -44,7 +46,7 @@ export const InformationOverview: React.FC<Props> = ({ scanResponse }) => {
   const isSameOwnerHoneypot = !!Number(honeypot_with_same_creator);
 
   return (
-    <Card className="w-full h-full bg-dark-secondary rounded-lg text-white">
+    <Card className="w-full h-full bg-dark-secondary rounded-lg text-white shadow-sunny">
       <CardHeader className="pb-0 font-semibold text-xl">
         Contract Security!
       </CardHeader>
